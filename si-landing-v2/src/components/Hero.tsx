@@ -1,7 +1,6 @@
-import { ArrowRight, Zap, Clock, TrendingUp } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { BackgroundBeams } from './ui/background-beams';
 import { TextReveal } from './ui/text-reveal';
-import { FloatingCard } from './ui/floating-card';
 import { ShinyText } from './ui/shiny-text';
 import { motion } from 'framer-motion';
 
@@ -96,56 +95,8 @@ export function Hero() {
               </p>
             </TextReveal>
           </div>
-
-          {/* 3 Core Metrics */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto mt-16">
-            <FloatingCard delay={0.1}>
-              <MetricCard
-                icon={<Clock className="w-8 h-8 text-[#8B5CF6]" />}
-                title="평균 구현 속도"
-                value="1주일"
-                description="협의 1~3회, 구현 7일"
-              />
-            </FloatingCard>
-            <FloatingCard delay={0.2}>
-              <MetricCard
-                icon={<Zap className="w-8 h-8 text-[#17DB4E]" />}
-                title="업무 자동화율"
-                value="70%"
-                description="반복 업무 평균 70% 자동화"
-              />
-            </FloatingCard>
-            <FloatingCard delay={0.3}>
-              <MetricCard
-                icon={<TrendingUp className="w-8 h-8 text-[#A855F7]" />}
-                title="고객 재계약률"
-                value="95%"
-                description="AI 교육·유지보수 만족도 최상"
-              />
-            </FloatingCard>
-          </div>
         </div>
       </section>
     </>
-  );
-}
-
-interface MetricCardProps {
-  icon: React.ReactNode;
-  title: string;
-  value: string;
-  description: string;
-}
-
-function MetricCard({ icon, title, value, description }: MetricCardProps) {
-  return (
-    <div className="bg-[#1A1A1A] border border-white/10 rounded-xl p-6 hover:border-purple-500/50 hover:shadow-lg hover:shadow-purple-500/20 transition-all h-full">
-      <div className="mb-4">{icon}</div>
-      <div className="text-sm text-gray-400 mb-1">{title}</div>
-      <div className="text-3xl font-bold bg-gradient-to-r from-[#8B5CF6] to-[#A855F7] bg-clip-text text-transparent mb-1">
-        {value}
-      </div>
-      <p className="text-xs text-gray-500">{description}</p>
-    </div>
   );
 }

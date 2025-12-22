@@ -7,9 +7,6 @@ export function AIDifferentiators() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <div className="inline-block px-4 py-2 bg-gradient-to-r from-[#8B5CF6] to-[#A855F7] rounded-full text-white text-sm font-semibold mb-4">
-            왜 ANYON인가?
-          </div>
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
             <span className="bg-gradient-to-r from-[#8B5CF6] to-[#A855F7] bg-clip-text text-transparent">
               AI 자동화에 미친 팀
@@ -42,23 +39,6 @@ export function AIDifferentiators() {
           })}
         </div>
 
-        {/* Tech Stack Showcase */}
-        <div className="bg-[#1A1A1A] border border-purple-500/30 rounded-2xl p-8 mb-12">
-          <h3 className="text-2xl font-bold text-white mb-6 text-center">
-            우리가 매일 사용하는 AI 기술 스택
-          </h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <TechBadge name="Claude Code" color="purple" />
-            <TechBadge name="N8N" color="green" />
-            <TechBadge name="RAG 시스템" color="blue" />
-            <TechBadge name="AI Agent" color="purple" />
-            <TechBadge name="LangChain" color="green" />
-            <TechBadge name="OpenAI API" color="blue" />
-            <TechBadge name="Vector DB" color="purple" />
-            <TechBadge name="Automation" color="green" />
-          </div>
-        </div>
-
         {/* Guarantee Box */}
         <div className="mt-12 bg-gradient-to-br from-[#8B5CF6]/10 to-[#A855F7]/10 border-2 border-purple-500/50 rounded-2xl p-8 text-center">
           <h3 className="text-2xl font-bold text-white mb-4">
@@ -66,9 +46,9 @@ export function AIDifferentiators() {
           </h3>
           <ul className="text-gray-300 space-y-2 max-w-2xl mx-auto mb-6">
             <li>✓ <strong className="text-purple-400">귀사 맞춤 AI 자동화 세팅법 제공</strong> (지속 업데이트)</li>
-            <li>✓ <strong className="text-green-400">전문팀 내부 AI 활용법 공유</strong> (N8N 워크플로우, 프롬프트 등)</li>
-            <li>✓ <strong className="text-blue-400">24시간 내 빠른 응답 보장</strong> (AI + 사람의 하이브리드)</li>
-            <li>✓ <strong className="text-yellow-400">ANYON 시스템으로 독립 운영</strong> (외주 의존도 0%)</li>
+            <li>✓ <strong className="text-purple-400">전문팀 내부 AI 활용법 공유</strong> (N8N 워크플로우, 프롬프트 등)</li>
+            <li>✓ <strong className="text-purple-400">24시간 내 빠른 응답 보장</strong> (AI + 사람의 하이브리드)</li>
+            <li>✓ <strong className="text-purple-400">ANYON 시스템으로 독립 운영</strong> (외주 의존도 0%)</li>
           </ul>
           <button
             onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
@@ -108,22 +88,4 @@ function DifferentiatorCard({ icon, title, description, metric }: Differentiator
   );
 }
 
-interface TechBadgeProps {
-  name: string;
-  color: 'purple' | 'green' | 'blue';
-}
-
-function TechBadge({ name, color }: TechBadgeProps) {
-  const colors = {
-    purple: 'bg-purple-500/20 border-purple-500/30 text-purple-300',
-    green: 'bg-green-500/20 border-green-500/30 text-green-300',
-    blue: 'bg-blue-500/20 border-blue-500/30 text-blue-300',
-  };
-
-  return (
-    <div className={`px-4 py-3 ${colors[color]} border rounded-lg text-center font-semibold text-sm hover:scale-105 transition-transform`}>
-      {name}
-    </div>
-  );
-}
 

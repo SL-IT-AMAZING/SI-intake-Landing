@@ -9,9 +9,6 @@ export function AnyonService() {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <div className="inline-block px-4 py-2 bg-gradient-to-r from-[#8B5CF6] to-[#A855F7] rounded-full text-white text-sm font-semibold mb-4">
-            외주 지옥 탈출 솔루션
-          </div>
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
             ANYON 시스템으로
             <br />
@@ -60,7 +57,7 @@ export function AnyonService() {
                 />
                 <BenefitItem
                   icon={<Lightbulb className="w-6 h-6 text-yellow-400" />}
-                  text="글로벌 고수들의 바이브코딩 기법 자동 통합"
+                  text="최신 트렌드 바이브코딩 기법 자동 통합"
                 />
                 <BenefitItem
                   icon={<TrendingUp className="w-6 h-6 text-green-400" />}

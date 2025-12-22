@@ -1,29 +1,23 @@
 import { trustMetrics } from '../assets/data/servicePackages';
 import { AnimatedNumber } from './ui/animated-number';
-import { ScrollVelocity } from './ui/scroll-velocity';
+import { LogoLoop } from './ui/logo-loop';
 
 export function TrustMetrics() {
-  // Split metrics into 2 rows for bidirectional scrolling
-  const row1Metrics = [trustMetrics[0], trustMetrics[1]];
-  const row2Metrics = [trustMetrics[2], trustMetrics[3]];
+  // Convert all metrics to LogoLoop items in one row
+  const allItems = trustMetrics.map((metric) => ({
+    node: <MetricCard metric={metric} />
+  }));
 
   return (
-    <section className="py-16 bg-[#0A0A0A] border-y border-white/10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-        {/* Row 1: Scroll right */}
-        <ScrollVelocity velocity={20} itemGap="gap-24">
-          {row1Metrics.map((metric) => (
-            <MetricCard key={metric.id} metric={metric} />
-          ))}
-        </ScrollVelocity>
-
-        {/* Row 2: Scroll left */}
-        <ScrollVelocity velocity={-15} itemGap="gap-24">
-          {row2Metrics.map((metric) => (
-            <MetricCard key={metric.id} metric={metric} />
-          ))}
-        </ScrollVelocity>
-      </div>
+    <section className="py-12 bg-[#0A0A0A] border-y border-white/10">
+      <LogoLoop
+        logos={allItems}
+        speed={50}
+        direction="left"
+        gap={96}
+        logoHeight={80}
+        pauseOnHover={true}
+      />
     </section>
   );
 }

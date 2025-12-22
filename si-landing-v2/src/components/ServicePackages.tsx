@@ -8,9 +8,6 @@ export function ServicePackages() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <TextReveal>
           <div className="text-center mb-16">
-            <div className="inline-block px-4 py-2 bg-gradient-to-r from-[#8B5CF6] to-[#A855F7] rounded-full text-white text-sm font-semibold mb-4">
-              우리가 하는 일
-            </div>
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
               당신의 비즈니스에 맞는
               <br />
