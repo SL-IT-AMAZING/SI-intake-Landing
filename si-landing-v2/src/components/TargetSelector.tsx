@@ -16,7 +16,7 @@ export function TargetSelector() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* 타겟 선택 탭 */}
         <div className="mb-16">
-          <p className="text-center text-gray-400 mb-6 text-sm font-semibold">
+          <p className="text-center text-gray-400 mb-6 text-lg font-semibold">
             당신의 비즈니스 스테이지를 선택하세요
           </p>
           <div className="flex flex-wrap justify-center gap-4">
@@ -24,9 +24,9 @@ export function TargetSelector() {
               <motion.button
                 key={target.id}
                 onClick={() => setSelectedTarget(target.id)}
-                className={`px-6 py-3 rounded-full font-semibold transition-all ${
+                className={`flex flex-col items-center gap-2 px-6 py-4 rounded-2xl font-semibold transition-all ${
                   selectedTarget === target.id
-                    ? 'bg-gradient-to-r from-[#8B5CF6] to-[#A855F7] text-white shadow-lg shadow-purple-500/50'
+                    ? 'bg-gradient-to-r from-[#8B5CF6] to-[#A855F7] shadow-lg shadow-purple-500/50'
                     : 'bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white border border-white/10'
                 }`}
                 whileHover={{ scale: 1.05 }}
@@ -35,8 +35,18 @@ export function TargetSelector() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: idx * 0.1 }}
               >
-                <span className="mr-2">{target.icon}</span>
-                {target.label}
+                {target.icon && (
+                  <img
+                    src={target.icon}
+                    alt={target.label}
+                    className={`w-20 h-20 object-contain transition-all ${
+                      selectedTarget === target.id
+                        ? 'brightness-0'
+                        : 'brightness-0 invert'
+                    }`}
+                  />
+                )}
+                <span className={selectedTarget === target.id ? 'text-black' : ''}>{target.label}</span>
               </motion.button>
             ))}
           </div>

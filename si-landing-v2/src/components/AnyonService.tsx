@@ -3,7 +3,7 @@ import Hyperspeed from './ui/hyperspeed';
 
 export function AnyonService() {
   return (
-    <section className="py-20 bg-[#0A0A0A] relative overflow-hidden">
+    <section className="py-20 pb-32 bg-[#0A0A0A] relative overflow-hidden">
       {/* Hyperspeed Background */}
       <div className="absolute inset-0">
         <Hyperspeed

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Send, CheckCircle2, Zap, Clock, Gift } from 'lucide-react';
+import FloatingLines from './ui/FloatingLines';
 
 export function ContactForm() {
   const [formData, setFormData] = useState({
@@ -27,10 +28,22 @@ export function ContactForm() {
 
   return (
     <section id="contact" className="py-20 bg-gradient-to-b from-[#0A0A0A] to-[#1A1A1A] relative overflow-hidden">
-      {/* Background effects */}
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-900/10 to-transparent"></div>
+      {/* FloatingLines Background */}
+      <div className="absolute inset-0 w-full h-full opacity-40">
+        <FloatingLines
+          linesGradient={['#8B5CF6', '#A855F7', '#6366F1']}
+          enabledWaves={['middle', 'bottom']}
+          lineCount={[12, 15]}
+          lineDistance={[6, 4]}
+          bendRadius={5.0}
+          bendStrength={-0.5}
+          interactive={true}
+          parallax={true}
+          mixBlendMode="screen"
+        />
+      </div>
 
-      <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
         {/* Header */}
         <div className="text-center mb-12">
           <div className="inline-block px-4 py-2 bg-gradient-to-r from-[#8B5CF6] to-[#A855F7] rounded-full text-white text-sm font-semibold mb-4">

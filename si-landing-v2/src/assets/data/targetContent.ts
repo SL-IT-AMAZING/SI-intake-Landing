@@ -15,7 +15,7 @@ export const targetContents: TargetContent[] = [
   {
     id: 'startup',
     label: '스타트업',
-    icon: '',
+    icon: '/mvp-icon-Photoroom.png',
     heroTitle: '아이디어만 있다면,\n ANYON이 1주일 안에 MVP를 만들어드립니다',
     heroSubtitle: '개발자 구하느라 3개월 낭비하지 마세요. AI 자동화로 빠르게 시장 검증하고 투자 유치하세요.',
     painPoints: [
@@ -33,7 +33,7 @@ export const targetContents: TargetContent[] = [
   {
     id: 'smb',
     label: '중소기업',
-    icon: '',
+    icon: '/prd-icon-Photoroom.png',
     heroTitle: '매출은 늘었는데 직원은 더 바쁘다?\nAI 자동화로 월 300만원 인건비 절감',
     heroSubtitle: '반복 업무는 AI에게, 팀은 핵심 업무에 집중. 실제 고객사 평균 업무시간 70% 단축 입증.',
     painPoints: [
@@ -51,7 +51,7 @@ export const targetContents: TargetContent[] = [
   {
     id: 'enterprise',
     label: '대기업',
-    icon: '',
+    icon: '/architecture-icon.png',
     heroTitle: 'AI 도입 고민만 1년?\n전문팀이 3일 안에 PoC 만들어드립니다',
     heroSubtitle: '보고서는 그만, 실제 작동하는 AI 시스템으로 임원 설득하세요. LLM·RAG·Agent 전문가 팀 투입.',
     painPoints: [
@@ -69,7 +69,7 @@ export const targetContents: TargetContent[] = [
   {
     id: 'agency',
     label: '에이전시',
-    icon: '',
+    icon: '/design-icon.png',
     heroTitle: '클라이언트 10개 관리에 지쳤다?\nAI가 광고·SNS·리포트 자동 관리',
     heroSubtitle: '매일 밤 11시까지 리포트 작성? 이제 AI가 1분 만에 끝냅니다. 실제 에이전시 업무시간 80% 단축.',
     painPoints: [
@@ -87,7 +87,7 @@ export const targetContents: TargetContent[] = [
   {
     id: 'individual',
     label: '개인/직장인',
-    icon: '',
+    icon: '/erd-icon.png',
     heroTitle: '매일 반복되는 업무에 지쳤다?\nAI가 3시간 업무를 3분으로 단축',
     heroSubtitle: '데이터 정리, 보고서 작성, 메일 발송, 자료 수집 등 반복 업무를 AI가 자동화. 퇴근 시간 2시간 당겨드립니다.',
     painPoints: [
