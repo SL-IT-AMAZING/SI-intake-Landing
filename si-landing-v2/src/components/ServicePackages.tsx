@@ -25,7 +25,7 @@ export function ServicePackages() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {servicePackages.map((pkg) => (
-            <PackageCard key={pkg.id} package={pkg} />
+            <PackageCard key={pkg.id} package={pkg} hideOnMobile={pkg.id !== 2} />
           ))}
         </div>
 
@@ -45,12 +45,15 @@ export function ServicePackages() {
 
 interface PackageCardProps {
   package: typeof servicePackages[0];
+  hideOnMobile?: boolean;
 }
 
-function PackageCard({ package: pkg }: PackageCardProps) {
+function PackageCard({ package: pkg, hideOnMobile = false }: PackageCardProps) {
   return (
     <div
-      className={`relative bg-[#1A1A1A] rounded-2xl p-8 transition-all ${pkg.popular
+      className={`relative bg-[#1A1A1A] rounded-2xl p-8 transition-all ${
+        hideOnMobile ? 'hidden md:block' : ''
+      } ${pkg.popular
           ? 'border-2 border-purple-500 shadow-lg shadow-purple-500/20 scale-105'
           : 'border border-white/10 hover:border-purple-500/50 hover:scale-105'
         }`}

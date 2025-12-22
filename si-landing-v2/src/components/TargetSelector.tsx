@@ -12,14 +12,15 @@ export function TargetSelector() {
   };
 
   return (
-    <section className="py-20 bg-[#0A0A0A] mt-20">
+    <section className="py-12 sm:py-20 bg-[#0A0A0A] mt-12 sm:mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* 타겟 선택 탭 */}
         <div className="mb-16">
           <p className="text-center text-gray-400 mb-6 text-lg font-semibold">
             당신의 비즈니스 스테이지를 선택하세요
           </p>
-          <div className="flex flex-wrap justify-center gap-4">
+          {/* 모바일: 3-2 레이아웃, 데스크톱: 가로 배치 */}
+          <div className="hidden sm:flex sm:flex-wrap sm:justify-center sm:gap-4">
             {targetContents.map((target, idx) => (
               <motion.button
                 key={target.id}
@@ -39,16 +40,83 @@ export function TargetSelector() {
                   <img
                     src={target.icon}
                     alt={target.label}
-                    className={`w-20 h-20 object-contain transition-all ${
+                    className={`w-16 h-16 md:w-20 md:h-20 object-contain transition-all ${
                       selectedTarget === target.id
                         ? 'brightness-0'
                         : 'brightness-0 invert'
                     }`}
                   />
                 )}
-                <span className={selectedTarget === target.id ? 'text-black' : ''}>{target.label}</span>
+                <span className={`text-base ${selectedTarget === target.id ? 'text-black' : ''}`}>{target.label}</span>
               </motion.button>
             ))}
+          </div>
+          {/* 모바일 레이아웃 */}
+          <div className="sm:hidden space-y-3">
+            {/* 첫 번째 행: 3개 */}
+            <div className="flex justify-center gap-2">
+              {targetContents.slice(0, 3).map((target, idx) => (
+                <motion.button
+                  key={target.id}
+                  onClick={() => setSelectedTarget(target.id)}
+                  className={`flex flex-col items-center gap-2 px-4 py-3 rounded-2xl font-semibold transition-all ${
+                    selectedTarget === target.id
+                      ? 'bg-gradient-to-r from-[#8B5CF6] to-[#A855F7] shadow-lg shadow-purple-500/50'
+                      : 'bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white border border-white/10'
+                  }`}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: idx * 0.1 }}
+                >
+                  {target.icon && (
+                    <img
+                      src={target.icon}
+                      alt={target.label}
+                      className={`w-12 h-12 object-contain transition-all ${
+                        selectedTarget === target.id
+                          ? 'brightness-0'
+                          : 'brightness-0 invert'
+                      }`}
+                    />
+                  )}
+                  <span className={`text-sm ${selectedTarget === target.id ? 'text-black' : ''}`}>{target.label}</span>
+                </motion.button>
+              ))}
+            </div>
+            {/* 두 번째 행: 2개 */}
+            <div className="flex justify-center gap-2">
+              {targetContents.slice(3, 5).map((target, idx) => (
+                <motion.button
+                  key={target.id}
+                  onClick={() => setSelectedTarget(target.id)}
+                  className={`flex flex-col items-center gap-2 px-4 py-3 rounded-2xl font-semibold transition-all ${
+                    selectedTarget === target.id
+                      ? 'bg-gradient-to-r from-[#8B5CF6] to-[#A855F7] shadow-lg shadow-purple-500/50'
+                      : 'bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white border border-white/10'
+                  }`}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: (idx + 3) * 0.1 }}
+                >
+                  {target.icon && (
+                    <img
+                      src={target.icon}
+                      alt={target.label}
+                      className={`w-12 h-12 object-contain transition-all ${
+                        selectedTarget === target.id
+                          ? 'brightness-0'
+                          : 'brightness-0 invert'
+                      }`}
+                    />
+                  )}
+                  <span className={`text-sm ${selectedTarget === target.id ? 'text-black' : ''}`}>{target.label}</span>
+                </motion.button>
+              ))}
+            </div>
           </div>
         </div>
 

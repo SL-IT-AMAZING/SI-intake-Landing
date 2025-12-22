@@ -27,7 +27,7 @@ export function ContactForm() {
   };
 
   return (
-    <section id="contact" className="py-20 bg-gradient-to-b from-[#0A0A0A] to-[#1A1A1A] relative overflow-hidden">
+    <section id="contact" className="py-12 sm:py-20 bg-gradient-to-b from-[#0A0A0A] to-[#1A1A1A] relative overflow-hidden">
       {/* FloatingLines Background */}
       <div className="absolute inset-0 w-full h-full opacity-40">
         <FloatingLines
@@ -45,24 +45,24 @@ export function ContactForm() {
 
       <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
         {/* Header */}
-        <div className="text-center mb-12">
-          <div className="inline-block px-4 py-2 bg-gradient-to-r from-[#8B5CF6] to-[#A855F7] rounded-full text-white text-sm font-semibold mb-4">
+        <div className="text-center mb-8 sm:mb-12">
+          <div className="inline-block px-4 py-2 bg-gradient-to-r from-[#8B5CF6] to-[#A855F7] rounded-full text-white text-xs sm:text-sm font-semibold mb-4">
             이번 달 선착순 5팀 한정
           </div>
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">
             <span className="bg-gradient-to-r from-[#8B5CF6] to-[#A855F7] bg-clip-text text-transparent">
               1주일 안에 결과
             </span>
             를 만나보세요
           </h2>
-          <p className="text-lg text-gray-400 mb-6">
+          <p className="text-base sm:text-lg text-gray-400 mb-4 sm:mb-6">
             무료 진단으로 우리 회사 자동화 가능 업무를 확인하세요.
             <br />
             <strong className="text-white">평균 24시간 내 답변, 협의 1~3회면 개발 시작</strong>
           </p>
 
           {/* Benefits 강조 */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 mb-6 sm:mb-8">
             <BenefitBadge
               icon={<Clock className="w-5 h-5 text-purple-400" />}
               text="24시간 내 답변"
@@ -79,16 +79,16 @@ export function ContactForm() {
         </div>
 
         {/* Form */}
-        <div className="bg-[#1A1A1A] rounded-2xl p-8 border-2 border-purple-500/30 shadow-lg shadow-purple-500/20">
+        <div className="bg-[#1A1A1A] rounded-2xl p-4 sm:p-6 md:p-8 border-2 border-purple-500/30 shadow-lg shadow-purple-500/20">
           {submitted ? (
-            <div className="text-center py-12">
-              <div className="inline-block p-4 bg-green-500/20 rounded-full mb-4">
-                <CheckCircle2 className="w-16 h-16 text-[#17DB4E]" />
+            <div className="text-center py-8 sm:py-12">
+              <div className="inline-block p-3 sm:p-4 bg-green-500/20 rounded-full mb-4">
+                <CheckCircle2 className="w-12 h-12 sm:w-16 sm:h-16 text-[#17DB4E]" />
               </div>
-              <h3 className="text-2xl font-bold text-white mb-3">
+              <h3 className="text-xl sm:text-2xl font-bold text-white mb-3">
                 ✓ 문의가 접수되었습니다!
               </h3>
-              <p className="text-gray-400 mb-6">
+              <p className="text-sm sm:text-base text-gray-400 mb-6">
                 담당자가 <strong className="text-white">24시간 내</strong>에 연락드립니다.
                 <br />
                 그동안 ANYON의 성공 사례를 확인해보세요!
@@ -207,16 +207,16 @@ export function ContactForm() {
 
               <button
                 type="submit"
-                className="w-full flex items-center justify-center gap-2 px-8 py-5 bg-gradient-to-r from-[#8B5CF6] to-[#A855F7] text-white font-bold text-lg rounded-full hover:shadow-lg hover:shadow-purple-500/50 transition-all transform hover:scale-105"
+                className="w-full flex items-center justify-center gap-2 px-6 py-4 sm:px-8 sm:py-5 bg-gradient-to-r from-[#8B5CF6] to-[#A855F7] text-white font-bold text-base sm:text-lg rounded-full hover:shadow-lg hover:shadow-purple-500/50 transition-all transform hover:scale-105"
               >
                 우리 회사 자동화 가능 업무 무료 진단받기
                 <Send className="w-5 h-5" />
               </button>
 
-              <p className="text-center text-base text-gray-400 mt-4">
+              <p className="text-center text-sm sm:text-base text-gray-400 mt-4">
                 문의 시 <strong className="text-purple-400">귀사 맞춤 AI 자동화 세팅법 설계 + 전문팀 내부 자료</strong> 평생 무료 (지속 업데이트)
                 <br />
-                <span className="text-sm text-gray-500">5분만 투자하면 월 300만원 절감 가능한지 알 수 있습니다</span>
+                <span className="text-xs sm:text-sm text-gray-500">5분만 투자하면 월 300만원 절감 가능한지 알 수 있습니다</span>
               </p>
             </form>
           )}
@@ -233,9 +233,9 @@ interface BenefitBadgeProps {
 
 function BenefitBadge({ icon, text }: BenefitBadgeProps) {
   return (
-    <div className="flex items-center justify-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-full">
+    <div className="flex items-center justify-center gap-2 px-3 sm:px-4 py-2 bg-white/5 border border-white/10 rounded-full">
       {icon}
-      <span className="text-sm font-semibold text-gray-300">{text}</span>
+      <span className="text-xs sm:text-sm font-semibold text-gray-300">{text}</span>
     </div>
   );
 }
