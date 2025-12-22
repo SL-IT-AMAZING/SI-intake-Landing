@@ -194,7 +194,7 @@ const LetterGlitch = ({
     resizeCanvas();
     animate();
 
-    let resizeTimeout: NodeJS.Timeout;
+    let resizeTimeout: number;
 
     const handleResize = () => {
       clearTimeout(resizeTimeout);

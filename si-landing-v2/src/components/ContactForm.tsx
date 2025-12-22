@@ -13,11 +13,47 @@ export function ContactForm() {
   });
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 5000);
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          access_key: import.meta.env.VITE_WEB3FORMS_ACCESS_KEY,
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          company: formData.company,
+          projectType: formData.projectType,
+          message: formData.message,
+          subject: `[ANYON 문의] ${formData.name} - ${formData.projectType}`,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setSubmitted(true);
+        setFormData({
+          name: '',
+          company: '',
+          email: '',
+          phone: '',
+          projectType: '',
+          message: '',
+        });
+        setTimeout(() => setSubmitted(false), 5000);
+      } else {
+        alert('문의 전송에 실패했습니다. 다시 시도해주세요.');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      alert('문의 전송 중 오류가 발생했습니다. 다시 시도해주세요.');
+    }
   };
 
   const handleChange = (
