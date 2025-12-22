@@ -119,7 +119,7 @@ export const aiDifferentiators = [
     metric: '16시간/일',
   },
   {
-    title: '비개발자 출신이 팀의 절반',
+    title: '비개발자 출신 다수',
     description: '개발자 언어 소통 필요 없음. 비개발자가 어려워하는 걸 정확히 이해하고 만듭니다.',
     metric: '50%',
   },
