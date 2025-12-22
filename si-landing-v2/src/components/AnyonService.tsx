@@ -1,10 +1,32 @@
-import { Rocket, Code2, Lightbulb, TrendingUp, Lock, Zap } from 'lucide-react';
+import { Code2, Lightbulb, TrendingUp, Lock } from 'lucide-react';
+import Hyperspeed from './ui/hyperspeed';
 
 export function AnyonService() {
   return (
     <section className="py-20 bg-[#0A0A0A] relative overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-purple-900/10 to-transparent"></div>
+      {/* Hyperspeed Background */}
+      <div className="absolute inset-0">
+        <Hyperspeed
+          effectOptions={{
+            distortion: 'turbulentDistortion',
+            lanesPerRoad: 3,
+            movingAwaySpeed: [30, 50],
+            movingCloserSpeed: [-30, -50],
+            colors: {
+              roadColor: 0x080808,
+              islandColor: 0x0a0a0a,
+              background: 0x000000,
+              shoulderLines: 0x131318,
+              brokenLines: 0x131318,
+              leftCars: [0x8B5CF6, 0xA855F7, 0xC084FC],
+              rightCars: [0x17DB4E, 0x10B981, 0x34D399],
+              sticks: 0x8B5CF6
+            }
+          }}
+        />
+      </div>
+      {/* Background gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-purple-900/10 to-transparent pointer-events-none"></div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
@@ -24,7 +46,7 @@ export function AnyonService() {
         </div>
 
         {/* Main Value Prop */}
-        <div className="bg-gradient-to-br from-[#1A1A1A] to-[#0A0A0A] border border-purple-500/30 rounded-2xl p-8 mb-12 shadow-lg shadow-purple-500/20">
+        <div className="bg-gradient-to-br from-[#1A1A1A]/50 to-[#0A0A0A]/50 border border-purple-500/30 rounded-2xl p-8 mb-12 shadow-lg shadow-purple-500/20 backdrop-blur-md">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
             <div>
               <h3 className="text-2xl font-bold text-white mb-4">
@@ -72,30 +94,8 @@ export function AnyonService() {
           </div>
         </div>
 
-        {/* 3 Key Benefits */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <FeatureCard
-            icon={<Rocket className="w-10 h-10 text-purple-400" />}
-            title="개발 속도 3배 향상"
-            description="바이브코딩 자동화로 1주일이면 충분. MVP부터 복잡한 자동화 시스템까지."
-            highlight="평균 구현 기간 1주일"
-          />
-          <FeatureCard
-            icon={<Zap className="w-10 h-10 text-green-400" />}
-            title="업무 효율 극대화"
-            description="반복 업무 70% 자동화 달성. 팀원들은 핵심 업무에만 집중 가능."
-            highlight="월 인건비 300만원 절감"
-          />
-          <FeatureCard
-            icon={<TrendingUp className="w-10 h-10 text-blue-400" />}
-            title="매출 성장 가속화"
-            description="시간과 비용 절감으로 비즈니스 확장에 집중. 실제 고객사 매출 평균 200% 증가."
-            highlight="ROI 3개월 이내 회수"
-          />
-        </div>
-
         {/* CTA */}
-        <div className="mt-12 text-center">
+        <div className="mt-8 text-center">
           <p className="text-gray-400 mb-6">
             <strong className="text-white">지금 도입하면 귀사 맞춤 AI 자동화 세팅법 + 최신 자료 평생 무료 제공 (지속 업데이트)</strong>
           </p>
@@ -125,22 +125,3 @@ function BenefitItem({ icon, text }: BenefitItemProps) {
   );
 }
 
-interface FeatureCardProps {
-  icon: React.ReactNode;
-  title: string;
-  description: string;
-  highlight: string;
-}
-
-function FeatureCard({ icon, title, description, highlight }: FeatureCardProps) {
-  return (
-    <div className="bg-[#1A1A1A] border border-white/10 rounded-xl p-6 hover:border-purple-500/50 hover:shadow-lg hover:shadow-purple-500/20 transition-all">
-      <div className="mb-4">{icon}</div>
-      <h3 className="text-xl font-bold text-white mb-3">{title}</h3>
-      <p className="text-gray-400 text-sm mb-4">{description}</p>
-      <div className="pt-4 border-t border-white/10">
-        <span className="text-purple-400 font-bold text-sm">{highlight}</span>
-      </div>
-    </div>
-  );
-}

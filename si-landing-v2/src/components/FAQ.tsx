@@ -78,15 +78,9 @@ export function FAQ() {
 
         {/* CTA */}
         <div className="mt-12 text-center">
-          <p className="text-gray-400 mb-4">
+          <p className="text-gray-400">
             더 궁금한 점이 있으신가요?
           </p>
-          <button
-            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-            className="px-8 py-3 bg-gradient-to-r from-[#8B5CF6] to-[#A855F7] text-white font-semibold rounded-full hover:shadow-lg hover:shadow-purple-500/50 transition-all transform hover:scale-105"
-          >
-            1:1 무료 상담 받기 →
-          </button>
         </div>
       </div>
     </section>
