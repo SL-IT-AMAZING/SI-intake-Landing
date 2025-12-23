@@ -75,7 +75,7 @@ export function Hero() {
           {/* Main Headline - 고정 메시지 */}
           <div className="text-center max-w-4xl mx-auto mb-12">
             <TextReveal>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight whitespace-pre-line">
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight whitespace-pre-line">
                 <ShinyText>
                   월 300만원 인건비 절감,{'\n'}AI가 반복 업무 70% 자동화
                 </ShinyText>
@@ -84,10 +84,10 @@ export function Hero() {
 
             <TextReveal delay={0.2}>
               <p className="text-lg sm:text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
-                개발자 구하느라 3개월 낭비하지 마세요.{' '}
-                <strong className="text-white">1주일이면 완성</strong>됩니다.
+                <span className="block sm:inline">개발자 구하느라 3개월 낭비하지 마세요.</span>{' '}
+                <span className="block sm:inline"><strong className="text-white">1주일이면 완성</strong>됩니다.</span>
                 <br />
-                <strong className="text-purple-400">평생 AI 자동화 세팅법 자료 제공 (지속 업데이트)</strong>
+                <strong className="text-purple-400">평생 AI 자동화 세팅법 자료 제공<br className="sm:hidden" /> (지속 업데이트)</strong>
               </p>
             </TextReveal>
 
@@ -99,7 +99,8 @@ export function Hero() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                회사/개인 자동화 가능 업무 무료 진단받기
+                <span className="hidden sm:inline">회사/개인 자동화 가능 업무 무료 진단받기</span>
+                <span className="sm:hidden">자동화 무료 진단받기</span>
                 <ArrowRight className="w-5 h-5" />
               </motion.button>
               <p className="text-sm text-gray-500 mt-3">
