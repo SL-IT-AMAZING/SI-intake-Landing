@@ -1,11 +1,17 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { targetContents, type TargetType } from '../assets/data/targetContent';
 import { motion } from 'framer-motion';
 import { Check, ArrowRight } from 'lucide-react';
+import { isMobile } from '../lib/device';
 
 export function TargetSelector() {
   const [selectedTarget, setSelectedTarget] = useState<TargetType>('startup');
+  const [mobile, setMobile] = useState<boolean | null>(null);
   const currentContent = targetContents.find((t) => t.id === selectedTarget)!;
+
+  useEffect(() => {
+    setMobile(isMobile());
+  }, []);
 
   const scrollToSection = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
@@ -30,11 +36,11 @@ export function TargetSelector() {
                     ? 'bg-gradient-to-r from-[#8B5CF6] to-[#A855F7] shadow-lg shadow-purple-500/50'
                     : 'bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white border border-white/10'
                 }`}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                initial={{ opacity: 0, y: 20 }}
+                whileHover={mobile === false ? { scale: 1.05 } : {}}
+                whileTap={mobile === false ? { scale: 0.95 } : {}}
+                initial={mobile === false ? { opacity: 0, y: 20 } : { opacity: 1, y: 0 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: idx * 0.1 }}
+                transition={mobile === false ? { delay: idx * 0.1 } : {}}
               >
                 {target.icon && (
                   <img
@@ -64,11 +70,11 @@ export function TargetSelector() {
                       ? 'bg-gradient-to-r from-[#8B5CF6] to-[#A855F7] shadow-lg shadow-purple-500/50'
                       : 'bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white border border-white/10'
                   }`}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  initial={{ opacity: 0, y: 20 }}
+                  whileHover={mobile === false ? { scale: 1.05 } : {}}
+                  whileTap={mobile === false ? { scale: 0.95 } : {}}
+                  initial={mobile === false ? { opacity: 0, y: 20 } : { opacity: 1, y: 0 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: idx * 0.1 }}
+                  transition={mobile === false ? { delay: idx * 0.1 } : {}}
                 >
                   {target.icon && (
                     <img
@@ -76,12 +82,12 @@ export function TargetSelector() {
                       alt={target.label}
                       className={`w-12 h-12 object-contain transition-all ${
                         selectedTarget === target.id
-                          ? 'brightness-0'
+                          ? 'brightness-0 invert'
                           : 'brightness-0 invert'
                       }`}
                     />
                   )}
-                  <span className={`text-sm ${selectedTarget === target.id ? 'text-black' : ''}`}>{target.label}</span>
+                  <span className={`text-sm ${selectedTarget === target.id ? 'text-white' : ''}`}>{target.label}</span>
                 </motion.button>
               ))}
             </div>
@@ -96,11 +102,11 @@ export function TargetSelector() {
                       ? 'bg-gradient-to-r from-[#8B5CF6] to-[#A855F7] shadow-lg shadow-purple-500/50'
                       : 'bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white border border-white/10'
                   }`}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  initial={{ opacity: 0, y: 20 }}
+                  whileHover={mobile === false ? { scale: 1.05 } : {}}
+                  whileTap={mobile === false ? { scale: 0.95 } : {}}
+                  initial={mobile === false ? { opacity: 0, y: 20 } : { opacity: 1, y: 0 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: (idx + 3) * 0.1 }}
+                  transition={mobile === false ? { delay: (idx + 3) * 0.1 } : {}}
                 >
                   {target.icon && (
                     <img
@@ -108,12 +114,12 @@ export function TargetSelector() {
                       alt={target.label}
                       className={`w-12 h-12 object-contain transition-all ${
                         selectedTarget === target.id
-                          ? 'brightness-0'
+                          ? 'brightness-0 invert'
                           : 'brightness-0 invert'
                       }`}
                     />
                   )}
-                  <span className={`text-sm ${selectedTarget === target.id ? 'text-black' : ''}`}>{target.label}</span>
+                  <span className={`text-sm ${selectedTarget === target.id ? 'text-white' : ''}`}>{target.label}</span>
                 </motion.button>
               ))}
             </div>

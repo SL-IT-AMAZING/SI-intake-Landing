@@ -1,30 +1,40 @@
 import { Code2, Lightbulb, TrendingUp, Lock } from 'lucide-react';
 import Hyperspeed from './ui/hyperspeed';
+import { useState, useEffect } from 'react';
+import { isMobile } from '../lib/device';
 
 export function AnyonService() {
+  const [mobile, setMobile] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    setMobile(isMobile());
+  }, []);
+
   return (
     <section className="py-12 pb-20 sm:py-20 sm:pb-32 bg-[#0A0A0A] relative overflow-hidden">
-      {/* Hyperspeed Background */}
-      <div className="absolute inset-0">
-        <Hyperspeed
-          effectOptions={{
-            distortion: 'turbulentDistortion',
-            lanesPerRoad: 3,
-            movingAwaySpeed: [30, 50],
-            movingCloserSpeed: [-30, -50],
-            colors: {
-              roadColor: 0x080808,
-              islandColor: 0x0a0a0a,
-              background: 0x000000,
-              shoulderLines: 0x131318,
-              brokenLines: 0x131318,
-              leftCars: [0x8B5CF6, 0xA855F7, 0xC084FC],
-              rightCars: [0x17DB4E, 0x10B981, 0x34D399],
-              sticks: 0x8B5CF6
-            }
-          }}
-        />
-      </div>
+      {/* Hyperspeed Background - Desktop Only */}
+      {mobile === false && (
+        <div className="absolute inset-0">
+          <Hyperspeed
+            effectOptions={{
+              distortion: 'turbulentDistortion',
+              lanesPerRoad: 3,
+              movingAwaySpeed: [30, 50],
+              movingCloserSpeed: [-30, -50],
+              colors: {
+                roadColor: 0x080808,
+                islandColor: 0x0a0a0a,
+                background: 0x000000,
+                shoulderLines: 0x131318,
+                brokenLines: 0x131318,
+                leftCars: [0x8B5CF6, 0xA855F7, 0xC084FC],
+                rightCars: [0x17DB4E, 0x10B981, 0x34D399],
+                sticks: 0x8B5CF6
+              }
+            }}
+          />
+        </div>
+      )}
       {/* Background gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-purple-900/10 to-transparent pointer-events-none"></div>
 

@@ -3,8 +3,16 @@ import { BackgroundBeams } from './ui/background-beams';
 import { TextReveal } from './ui/text-reveal';
 import { ShinyText } from './ui/shiny-text';
 import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
+import { isMobile } from '../lib/device';
 
 export function Hero() {
+  const [mobile, setMobile] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    setMobile(isMobile());
+  }, []);
+
   const scrollToSection = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -12,38 +20,42 @@ export function Hero() {
   return (
     <>
       <section className="relative bg-[#0A0A0A] overflow-hidden py-20 flex items-center">
-        {/* Background Beams Effect */}
-        <BackgroundBeams className="opacity-30" />
+        {/* Background Beams Effect - Desktop Only */}
+        {mobile === false && <BackgroundBeams className="opacity-30" />}
 
         {/* Purple gradient background */}
         <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-transparent to-purple-600/10"></div>
 
-        {/* Animated gradient orbs */}
-        <motion.div
-          className="absolute top-20 right-20 w-96 h-96 bg-gradient-to-r from-[#8B5CF6] to-[#A855F7] rounded-full blur-3xl opacity-20"
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.2, 0.3, 0.2],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-        <motion.div
-          className="absolute bottom-20 left-20 w-96 h-96 bg-gradient-to-r from-[#A855F7] to-[#8B5CF6] rounded-full blur-3xl opacity-20"
-          animate={{
-            scale: [1, 1.1, 1],
-            opacity: [0.2, 0.25, 0.2],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 1,
-          }}
-        />
+        {/* Animated gradient orbs - Desktop Only */}
+        {mobile === false && (
+          <>
+            <motion.div
+              className="absolute top-20 right-20 w-96 h-96 bg-gradient-to-r from-[#8B5CF6] to-[#A855F7] rounded-full blur-3xl opacity-20"
+              animate={{
+                scale: [1, 1.2, 1],
+                opacity: [0.2, 0.3, 0.2],
+              }}
+              transition={{
+                duration: 8,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+            <motion.div
+              className="absolute bottom-20 left-20 w-96 h-96 bg-gradient-to-r from-[#A855F7] to-[#8B5CF6] rounded-full blur-3xl opacity-20"
+              animate={{
+                scale: [1, 1.1, 1],
+                opacity: [0.2, 0.25, 0.2],
+              }}
+              transition={{
+                duration: 10,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 1,
+              }}
+            />
+          </>
+        )}
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           {/* Logo */}

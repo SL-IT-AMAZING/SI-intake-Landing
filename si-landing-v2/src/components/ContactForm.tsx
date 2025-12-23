@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Send, CheckCircle2, Zap, Clock, Gift } from 'lucide-react';
 import FloatingLines from './ui/FloatingLines';
+import { isMobile } from '../lib/device';
 
 export function ContactForm() {
+  const [mobile, setMobile] = useState<boolean | null>(null);
   const [formData, setFormData] = useState({
     name: '',
     company: '',
@@ -12,6 +14,10 @@ export function ContactForm() {
     message: '',
   });
   const [submitted, setSubmitted] = useState(false);
+
+  useEffect(() => {
+    setMobile(isMobile());
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -64,20 +70,22 @@ export function ContactForm() {
 
   return (
     <section id="contact" className="py-12 sm:py-20 bg-gradient-to-b from-[#0A0A0A] to-[#1A1A1A] relative overflow-hidden">
-      {/* FloatingLines Background */}
-      <div className="absolute inset-0 w-full h-full opacity-40">
-        <FloatingLines
-          linesGradient={['#8B5CF6', '#A855F7', '#6366F1']}
-          enabledWaves={['middle', 'bottom']}
-          lineCount={[12, 15]}
-          lineDistance={[6, 4]}
-          bendRadius={5.0}
-          bendStrength={-0.5}
-          interactive={true}
-          parallax={true}
-          mixBlendMode="screen"
-        />
-      </div>
+      {/* FloatingLines Background - Desktop Only */}
+      {mobile === false && (
+        <div className="absolute inset-0 w-full h-full opacity-40">
+          <FloatingLines
+            linesGradient={['#8B5CF6', '#A855F7', '#6366F1']}
+            enabledWaves={['middle', 'bottom']}
+            lineCount={[12, 15]}
+            lineDistance={[6, 4]}
+            bendRadius={5.0}
+            bendStrength={-0.5}
+            interactive={true}
+            parallax={true}
+            mixBlendMode="screen"
+          />
+        </div>
+      )}
 
       <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
         {/* Header */}

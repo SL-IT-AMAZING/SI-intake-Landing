@@ -1,4 +1,4 @@
-import { Mail, Phone, MapPin } from 'lucide-react';
+import { Mail } from 'lucide-react';
 
 export function Footer() {
   return (
@@ -25,11 +25,6 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a href="#portfolio" className="hover:text-purple-400 transition-colors">
-                  포트폴리오
-                </a>
-              </li>
-              <li>
                 <a href="#contact" className="hover:text-purple-400 transition-colors">
                   문의하기
                 </a>
@@ -42,16 +37,8 @@ export function Footer() {
             <h3 className="text-white font-semibold mb-4">Contact</h3>
             <ul className="space-y-3 text-sm">
               <li className="flex items-center gap-2">
-                <Phone className="w-4 h-4 text-purple-400" />
-                <span>02-1234-5678</span>
-              </li>
-              <li className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-purple-400" />
-                <span>contact@anyon.dev</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <MapPin className="w-4 h-4 mt-0.5 text-purple-400" />
-                <span>서울특별시 강남구 테헤란로 123</span>
+                <span>slit.amazing@gmail.com</span>
               </li>
             </ul>
           </div>

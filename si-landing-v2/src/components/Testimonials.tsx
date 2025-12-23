@@ -1,5 +1,7 @@
 import { Star, Quote } from 'lucide-react';
 import LightPillar from './ui/LightPillar';
+import { useState, useEffect } from 'react';
+import { isMobile } from '../lib/device';
 
 const testimonials = [
   {
@@ -32,24 +34,32 @@ const testimonials = [
 ];
 
 export function Testimonials() {
+  const [mobile, setMobile] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    setMobile(isMobile());
+  }, []);
+
   return (
     <section className="py-20 bg-gradient-to-b from-[#0A0A0A] to-[#1A1A1A] relative overflow-hidden">
-      {/* LightPillar Background */}
-      <div className="absolute inset-0 w-full h-full">
-        <LightPillar
-          topColor="#8B5CF6"
-          bottomColor="#A855F7"
-          intensity={0.3}
-          rotationSpeed={0.2}
-          glowAmount={0.003}
-          pillarWidth={4.0}
-          pillarHeight={0.3}
-          noiseIntensity={0.3}
-          pillarRotation={15}
-          interactive={false}
-          mixBlendMode="screen"
-        />
-      </div>
+      {/* LightPillar Background - Desktop Only */}
+      {mobile === false && (
+        <div className="absolute inset-0 w-full h-full">
+          <LightPillar
+            topColor="#8B5CF6"
+            bottomColor="#A855F7"
+            intensity={0.3}
+            rotationSpeed={0.2}
+            glowAmount={0.003}
+            pillarWidth={4.0}
+            pillarHeight={0.3}
+            noiseIntensity={0.3}
+            pillarRotation={15}
+            interactive={false}
+            mixBlendMode="screen"
+          />
+        </div>
+      )}
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
