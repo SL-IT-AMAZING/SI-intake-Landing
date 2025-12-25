@@ -3,31 +3,33 @@ import { BackgroundBeams } from './ui/background-beams';
 import { TextReveal } from './ui/text-reveal';
 import { ShinyText } from './ui/shiny-text';
 import { motion } from 'framer-motion';
-import { useState, useEffect } from 'react';
-import { isMobile } from '../lib/device';
+import { useMobile } from '../lib/device';
+import { useInView } from '../hooks/useInView';
+import { useReducedMotion } from '../hooks/useReducedMotion';
 
 export function Hero() {
-  const [mobile, setMobile] = useState<boolean | null>(null);
-
-  useEffect(() => {
-    setMobile(isMobile());
-  }, []);
+  const mobile = useMobile();
+  const { ref, isInView } = useInView({ rootMargin: '0px' });
+  const prefersReducedMotion = useReducedMotion();
 
   const scrollToSection = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    document.getElementById(id)?.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth' });
   };
+
+  // 데스크톱이고 뷰포트에 있을 때만, 그리고 reduced motion 비선호시만 애니메이션 활성화
+  const showAnimations = !mobile && isInView && !prefersReducedMotion;
 
   return (
     <>
-      <section className="relative bg-[#0A0A0A] overflow-hidden py-20 flex items-center">
-        {/* Background Beams Effect - Desktop Only */}
-        {mobile === false && <BackgroundBeams className="opacity-30" />}
+      <section ref={ref} className="relative bg-[#0A0A0A] overflow-hidden py-20 flex items-center">
+        {/* Background Beams Effect - Desktop Only & 뷰포트에 있을 때만 */}
+        {showAnimations && <BackgroundBeams className="opacity-30" />}
 
         {/* Purple gradient background */}
         <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-transparent to-purple-600/10"></div>
 
-        {/* Animated gradient orbs - Desktop Only */}
-        {mobile === false && (
+        {/* Animated gradient orbs - Desktop Only & 뷰포트에 있을 때만 */}
+        {showAnimations && (
           <>
             <motion.div
               className="absolute top-20 right-20 w-96 h-96 bg-gradient-to-r from-[#8B5CF6] to-[#A855F7] rounded-full blur-3xl opacity-20"

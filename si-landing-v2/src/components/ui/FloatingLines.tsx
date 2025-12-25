@@ -225,6 +225,7 @@ type FloatingLinesProps = {
   parallax?: boolean;
   parallaxStrength?: number;
   mixBlendMode?: React.CSSProperties['mixBlendMode'];
+  isActive?: boolean;
 };
 
 function hexToVec3(hex: string): Vector3 {
@@ -266,7 +267,8 @@ export default function FloatingLines({
   mouseDamping = 0.05,
   parallax = true,
   parallaxStrength = 0.2,
-  mixBlendMode = 'screen'
+  mixBlendMode = 'screen',
+  isActive = true
 }: FloatingLinesProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const targetMouseRef = useRef<Vector2>(new Vector2(-1000, -1000));
@@ -299,7 +301,7 @@ export default function FloatingLines({
   const bottomLineDistance = enabledWaves.includes('bottom') ? getLineDistance('bottom') * 0.01 : 0.01;
 
   useEffect(() => {
-    if (!containerRef.current) return;
+    if (!containerRef.current || !isActive) return;
 
     const scene = new Scene();
 
@@ -433,7 +435,18 @@ export default function FloatingLines({
     }
 
     let raf = 0;
-    const renderLoop = () => {
+    let lastTime = 0;
+    const targetFPS = 30;
+    const frameInterval = 1000 / targetFPS;
+
+    const renderLoop = (currentTime: number) => {
+      raf = requestAnimationFrame(renderLoop);
+
+      const elapsed = currentTime - lastTime;
+      if (elapsed < frameInterval) return;
+
+      lastTime = currentTime - (elapsed % frameInterval);
+
       uniforms.iTime.value = clock.getElapsedTime();
 
       if (interactive) {
@@ -450,9 +463,8 @@ export default function FloatingLines({
       }
 
       renderer.render(scene, camera);
-      raf = requestAnimationFrame(renderLoop);
     };
-    renderLoop();
+    raf = requestAnimationFrame(renderLoop);
 
     return () => {
       cancelAnimationFrame(raf);
@@ -486,7 +498,8 @@ export default function FloatingLines({
     bendStrength,
     mouseDamping,
     parallax,
-    parallaxStrength
+    parallaxStrength,
+    isActive
   ]);
 
   return (

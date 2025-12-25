@@ -14,6 +14,7 @@ interface LightPillarProps {
   noiseIntensity?: number;
   mixBlendMode?: React.CSSProperties['mixBlendMode'];
   pillarRotation?: number;
+  isActive?: boolean;
 }
 
 const LightPillar: React.FC<LightPillarProps> = ({
@@ -28,7 +29,8 @@ const LightPillar: React.FC<LightPillarProps> = ({
   pillarHeight = 0.4,
   noiseIntensity = 0.5,
   mixBlendMode = 'screen',
-  pillarRotation = 0
+  pillarRotation = 0,
+  isActive = true
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const rafRef = useRef<number | null>(null);
@@ -51,7 +53,7 @@ const LightPillar: React.FC<LightPillarProps> = ({
   }, []);
 
   useEffect(() => {
-    if (!containerRef.current || !webGLSupported) return;
+    if (!containerRef.current || !webGLSupported || !isActive) return;
 
     const container = containerRef.current;
     const width = container.clientWidth;
@@ -174,7 +176,7 @@ const LightPillar: React.FC<LightPillarProps> = ({
 
         vec3 color = vec3(0.0);
 
-        for(float i = 0.0; i < 100.0; i++) {
+        for(float i = 0.0; i < 50.0; i++) {
           vec3 pos = origin + direction * depth;
           pos.xz *= rotX;
 
@@ -255,7 +257,7 @@ const LightPillar: React.FC<LightPillarProps> = ({
     }
 
     let lastTime = performance.now();
-    const targetFPS = 60;
+    const targetFPS = 30;
     const frameTime = 1000 / targetFPS;
 
     const animate = (currentTime: number) => {
@@ -331,7 +333,8 @@ const LightPillar: React.FC<LightPillarProps> = ({
     pillarHeight,
     noiseIntensity,
     pillarRotation,
-    webGLSupported
+    webGLSupported,
+    isActive
   ]);
 
   if (!webGLSupported) {

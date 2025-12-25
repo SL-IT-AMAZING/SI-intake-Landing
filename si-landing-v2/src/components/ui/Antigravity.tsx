@@ -21,7 +21,7 @@ interface AntigravityProps {
 }
 
 const AntigravityInner: React.FC<AntigravityProps> = ({
-  count = 300,
+  count = 150,
   magnetRadius = 10,
   ringRadius = 10,
   waveSpeed = 0.4,
@@ -44,6 +44,7 @@ const AntigravityInner: React.FC<AntigravityProps> = ({
   const lastMousePos = useRef({ x: 0, y: 0 });
   const lastMouseMoveTime = useRef(0);
   const virtualMouse = useRef({ x: 0, y: 0 });
+  const frameCount = useRef(0);
 
   const particles = useMemo(() => {
     const temp = [];
@@ -87,6 +88,10 @@ const AntigravityInner: React.FC<AntigravityProps> = ({
   }, [count, viewport.width, viewport.height]);
 
   useFrame(state => {
+    // 프레임 스킵 - 매 2프레임마다 업데이트 (30fps)
+    frameCount.current++;
+    if (frameCount.current % 2 !== 0) return;
+
     const mesh = meshRef.current;
     if (!mesh) return;
 

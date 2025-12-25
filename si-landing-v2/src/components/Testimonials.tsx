@@ -1,7 +1,8 @@
 import { Star, Quote } from 'lucide-react';
 import LightPillar from './ui/LightPillar';
-import { useState, useEffect } from 'react';
-import { isMobile } from '../lib/device';
+import { useMobile } from '../lib/device';
+import { useInView } from '../hooks/useInView';
+import { useReducedMotion } from '../hooks/useReducedMotion';
 
 const testimonials = [
   {
@@ -34,16 +35,17 @@ const testimonials = [
 ];
 
 export function Testimonials() {
-  const [mobile, setMobile] = useState<boolean | null>(null);
+  const mobile = useMobile();
+  const { ref, isInView } = useInView({ rootMargin: '100px' });
+  const prefersReducedMotion = useReducedMotion();
 
-  useEffect(() => {
-    setMobile(isMobile());
-  }, []);
+  // 애니메이션 비활성화 조건: 모바일이거나 reduced motion 선호
+  const showAnimations = !mobile && !prefersReducedMotion;
 
   return (
-    <section className="py-20 bg-gradient-to-b from-[#0A0A0A] to-[#1A1A1A] relative overflow-hidden">
-      {/* LightPillar Background - Desktop Only */}
-      {mobile === false && (
+    <section ref={ref} className="py-20 bg-gradient-to-b from-[#0A0A0A] to-[#1A1A1A] relative overflow-hidden">
+      {/* LightPillar Background - Desktop Only, 뷰포트에 있을 때, reduced motion 아닐 때만 */}
+      {showAnimations && (
         <div className="absolute inset-0 w-full h-full">
           <LightPillar
             topColor="#8B5CF6"
@@ -57,6 +59,7 @@ export function Testimonials() {
             pillarRotation={15}
             interactive={false}
             mixBlendMode="screen"
+            isActive={isInView}
           />
         </div>
       )}

@@ -1,10 +1,17 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Send, CheckCircle2, Zap, Clock, Gift } from 'lucide-react';
 import FloatingLines from './ui/FloatingLines';
-import { isMobile } from '../lib/device';
+import { useMobile } from '../lib/device';
+import { useInView } from '../hooks/useInView';
+import { useReducedMotion } from '../hooks/useReducedMotion';
 
 export function ContactForm() {
-  const [mobile, setMobile] = useState<boolean | null>(null);
+  const mobile = useMobile();
+  const { ref, isInView } = useInView({ rootMargin: '100px' });
+  const prefersReducedMotion = useReducedMotion();
+
+  // 애니메이션 비활성화 조건
+  const showAnimations = !mobile && !prefersReducedMotion;
   const [formData, setFormData] = useState({
     name: '',
     company: '',
@@ -14,10 +21,6 @@ export function ContactForm() {
     message: '',
   });
   const [submitted, setSubmitted] = useState(false);
-
-  useEffect(() => {
-    setMobile(isMobile());
-  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -69,9 +72,9 @@ export function ContactForm() {
   };
 
   return (
-    <section id="contact" className="py-12 sm:py-20 bg-gradient-to-b from-[#0A0A0A] to-[#1A1A1A] relative overflow-hidden">
-      {/* FloatingLines Background - Desktop Only */}
-      {mobile === false && (
+    <section ref={ref} id="contact" className="py-12 sm:py-20 bg-gradient-to-b from-[#0A0A0A] to-[#1A1A1A] relative overflow-hidden">
+      {/* FloatingLines Background - Desktop Only, 뷰포트에 있을 때, reduced motion 아닐 때만 */}
+      {showAnimations && (
         <div className="absolute inset-0 w-full h-full opacity-40">
           <FloatingLines
             linesGradient={['#8B5CF6', '#A855F7', '#6366F1']}
@@ -83,6 +86,7 @@ export function ContactForm() {
             interactive={true}
             parallax={true}
             mixBlendMode="screen"
+            isActive={isInView}
           />
         </div>
       )}

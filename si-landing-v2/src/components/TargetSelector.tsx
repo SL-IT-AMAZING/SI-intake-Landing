@@ -1,20 +1,21 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { targetContents, type TargetType } from '../assets/data/targetContent';
 import { motion } from 'framer-motion';
 import { Check, ArrowRight } from 'lucide-react';
-import { isMobile } from '../lib/device';
+import { useMobile } from '../lib/device';
+import { useReducedMotion } from '../hooks/useReducedMotion';
 
 export function TargetSelector() {
   const [selectedTarget, setSelectedTarget] = useState<TargetType>('startup');
-  const [mobile, setMobile] = useState<boolean | null>(null);
+  const mobile = useMobile();
+  const prefersReducedMotion = useReducedMotion();
   const currentContent = targetContents.find((t) => t.id === selectedTarget)!;
 
-  useEffect(() => {
-    setMobile(isMobile());
-  }, []);
+  // 애니메이션 비활성화 조건: 모바일이거나 reduced motion 선호
+  const disableAnimations = mobile || prefersReducedMotion;
 
   const scrollToSection = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    document.getElementById(id)?.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth' });
   };
 
   return (
@@ -36,11 +37,11 @@ export function TargetSelector() {
                     ? 'bg-gradient-to-r from-[#8B5CF6] to-[#A855F7] shadow-lg shadow-purple-500/50'
                     : 'bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white border border-white/10'
                 }`}
-                whileHover={mobile === false ? { scale: 1.05 } : {}}
-                whileTap={mobile === false ? { scale: 0.95 } : {}}
-                initial={mobile === false ? { opacity: 0, y: 20 } : { opacity: 1, y: 0 }}
+                whileHover={!disableAnimations ? { scale: 1.05 } : {}}
+                whileTap={!disableAnimations ? { scale: 0.95 } : {}}
+                initial={!disableAnimations ? { opacity: 0, y: 20 } : { opacity: 1, y: 0 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={mobile === false ? { delay: idx * 0.1 } : {}}
+                transition={!disableAnimations ? { delay: idx * 0.1 } : {}}
               >
                 {target.icon && (
                   <img
@@ -70,11 +71,11 @@ export function TargetSelector() {
                       ? 'bg-gradient-to-r from-[#8B5CF6] to-[#A855F7] shadow-lg shadow-purple-500/50'
                       : 'bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white border border-white/10'
                   }`}
-                  whileHover={mobile === false ? { scale: 1.05 } : {}}
-                  whileTap={mobile === false ? { scale: 0.95 } : {}}
-                  initial={mobile === false ? { opacity: 0, y: 20 } : { opacity: 1, y: 0 }}
+                  whileHover={!disableAnimations ? { scale: 1.05 } : {}}
+                  whileTap={!disableAnimations ? { scale: 0.95 } : {}}
+                  initial={!disableAnimations ? { opacity: 0, y: 20 } : { opacity: 1, y: 0 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={mobile === false ? { delay: idx * 0.1 } : {}}
+                  transition={!disableAnimations ? { delay: idx * 0.1 } : {}}
                 >
                   {target.icon && (
                     <img
@@ -102,11 +103,11 @@ export function TargetSelector() {
                       ? 'bg-gradient-to-r from-[#8B5CF6] to-[#A855F7] shadow-lg shadow-purple-500/50'
                       : 'bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white border border-white/10'
                   }`}
-                  whileHover={mobile === false ? { scale: 1.05 } : {}}
-                  whileTap={mobile === false ? { scale: 0.95 } : {}}
-                  initial={mobile === false ? { opacity: 0, y: 20 } : { opacity: 1, y: 0 }}
+                  whileHover={!disableAnimations ? { scale: 1.05 } : {}}
+                  whileTap={!disableAnimations ? { scale: 0.95 } : {}}
+                  initial={!disableAnimations ? { opacity: 0, y: 20 } : { opacity: 1, y: 0 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={mobile === false ? { delay: (idx + 3) * 0.1 } : {}}
+                  transition={!disableAnimations ? { delay: (idx + 3) * 0.1 } : {}}
                 >
                   {target.icon && (
                     <img

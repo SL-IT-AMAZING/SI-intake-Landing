@@ -1,20 +1,33 @@
 import { Brain, Users, GraduationCap, Unlock } from 'lucide-react';
 import { aiDifferentiators } from '../assets/data/targetContent';
 import LetterGlitch from './ui/LetterGlitch';
+import { useInView } from '../hooks/useInView';
+import { useMobile } from '../lib/device';
+import { useReducedMotion } from '../hooks/useReducedMotion';
 
 export function AIDifferentiators() {
+  const { ref, isInView } = useInView({ rootMargin: '100px' });
+  const mobile = useMobile();
+  const prefersReducedMotion = useReducedMotion();
+
+  // 애니메이션 비활성화 조건: 모바일이거나 reduced motion 선호
+  const showAnimations = !mobile && !prefersReducedMotion;
+
   return (
-    <section className="pt-12 pb-20 sm:pt-20 sm:pb-32 bg-gradient-to-b from-[#0A0A0A] to-[#1A1A1A] relative overflow-hidden">
-      {/* LetterGlitch Background */}
-      <div className="absolute inset-0 w-full h-full opacity-35">
-        <LetterGlitch
-          glitchColors={['#8B5CF6', '#A855F7', '#6366F1']}
-          glitchSpeed={30}
-          centerVignette={true}
-          outerVignette={false}
-          smooth={true}
-        />
-      </div>
+    <section ref={ref} className="pt-12 pb-20 sm:pt-20 sm:pb-32 bg-gradient-to-b from-[#0A0A0A] to-[#1A1A1A] relative overflow-hidden">
+      {/* LetterGlitch Background - 뷰포트에 있고 모바일/reduced motion이 아닐 때만 활성화 */}
+      {showAnimations && (
+        <div className="absolute inset-0 w-full h-full opacity-35">
+          <LetterGlitch
+            glitchColors={['#8B5CF6', '#A855F7', '#6366F1']}
+            glitchSpeed={50}
+            centerVignette={true}
+            outerVignette={false}
+            smooth={true}
+            isActive={isInView}
+          />
+        </div>
+      )}
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}

@@ -2,11 +2,12 @@ import { useRef, useEffect } from 'react';
 
 const LetterGlitch = ({
   glitchColors = ['#2b4539', '#61dca3', '#61b3dc'],
-  glitchSpeed = 50,
+  glitchSpeed = 100,
   centerVignette = false,
   outerVignette = true,
   smooth = true,
-  characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$&*()-_+=/[]{};:<>.,0123456789'
+  characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$&*()-_+=/[]{};:<>.,0123456789',
+  isActive = true
 }: {
   glitchColors?: string[];
   glitchSpeed?: number;
@@ -14,6 +15,7 @@ const LetterGlitch = ({
   outerVignette?: boolean;
   smooth?: boolean;
   characters?: string;
+  isActive?: boolean;
 }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const animationRef = useRef<number | null>(null);
@@ -132,7 +134,7 @@ const LetterGlitch = ({
   const updateLetters = () => {
     if (!letters.current || letters.current.length === 0) return;
 
-    const updateCount = Math.max(1, Math.floor(letters.current.length * 0.05));
+    const updateCount = Math.max(1, Math.floor(letters.current.length * 0.02));
 
     for (let i = 0; i < updateCount; i++) {
       const index = Math.floor(Math.random() * letters.current.length);
@@ -192,7 +194,11 @@ const LetterGlitch = ({
 
     context.current = canvas.getContext('2d');
     resizeCanvas();
-    animate();
+
+    // isActive가 false면 애니메이션 시작하지 않음
+    if (isActive) {
+      animate();
+    }
 
     let resizeTimeout: number;
 
@@ -201,7 +207,9 @@ const LetterGlitch = ({
       resizeTimeout = setTimeout(() => {
         cancelAnimationFrame(animationRef.current as number);
         resizeCanvas();
-        animate();
+        if (isActive) {
+          animate();
+        }
       }, 100);
     };
 
@@ -212,7 +220,7 @@ const LetterGlitch = ({
       window.removeEventListener('resize', handleResize);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [glitchSpeed, smooth]);
+  }, [glitchSpeed, smooth, isActive]);
 
   return (
     <div className="relative w-full h-full bg-black overflow-hidden">

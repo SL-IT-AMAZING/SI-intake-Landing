@@ -95,11 +95,9 @@ html {
   color: #1A1A1A;
 }
 
-/* Smooth transitions */
-* {
-  transition-property: background-color, border-color, color, fill, stroke;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
+/* Smooth transitions - 인터랙티브 요소에만 적용 (성능 최적화) */
+button, a, input, select, textarea {
+  transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
 }
 
 /* Line clamp */
@@ -136,4 +134,32 @@ html {
     animation: none;
     background: linear-gradient(to right, #8B5CF6, #A855F7);
   }
+
+  /* 모든 애니메이션 비활성화 */
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* 스크롤 동작도 비활성화 */
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* GPU 가속 힌트 - 애니메이션 컨테이너용 */
+.gpu-accelerated {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* WebGL/Canvas 컨테이너 최적화 */
+.floating-lines-container,
+.letter-glitch-container,
+.light-pillar-container {
+  contain: layout style paint;
+  isolation: isolate;
 }
